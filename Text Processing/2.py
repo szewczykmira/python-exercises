@@ -10,6 +10,7 @@ EXAMPLES = [
     "Bob Dylan - 06 Pretty Peggy-O (1962).mp3",
     ]
 
+# We need to escape parentheses
 EXAMPLE_INPUT = '<album> - <track> <title> \(<year>\).mp3'
 EXAMPLE_OUTPUT = 'Bob Dylan/<year> <album>/<track> <title>.mp3'
 
@@ -58,8 +59,6 @@ class ParseFileName:
         return self.put_data(self.get_data(elem))
 
 if __name__ == '__main__':
-    # input_format = sys.argv[1]
-    # output_format = sys.argv[2]
     parser = ParseFileName(EXAMPLE_INPUT, EXAMPLE_OUTPUT)
     for elem in EXAMPLES:
         print(parser.parse(elem))
