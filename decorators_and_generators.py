@@ -17,15 +17,6 @@ def memoize(func):
     return helper
 
 
-@memoize
-def fib(n):
-    print("fib({})".format(n))
-    if n <= 2:
-        return 1
-    else:
-        return fib(n-1) + fib(n-2)
-
-
 def fib_non_rec():
     a, b = 1, 1
     while True:
@@ -43,6 +34,12 @@ def accepts(*types):
         return wrapper
     return decorator
 
-@accepts(float, int)
-def foo(a, b):
-    print('totlo')
+
+def returns(expected):
+    def decorator(func):
+        def wrapper(*args):
+            result = func(*args)
+            if not isinstance(result, expected):
+                raise ValueError
+        return wrapper
+    return decorator
