@@ -25,13 +25,24 @@ def fib(n):
     else:
         return fib(n-1) + fib(n-2)
 
-@after5
-def test():
-    print('Yo!')
-
 
 def fib_non_rec():
     a, b = 1, 1
     while True:
         yield a
         a, b = b, a + b
+
+
+def accepts(*types):
+    def decorator(func):
+        def wrapper(*args):
+            zip_types = zip(args, types)
+            if not all([isinstance(a, b) for a, b in zip_types]):
+                raise AttributeError
+            func(*args)
+        return wrapper
+    return decorator
+
+@accepts(float, int)
+def foo(a, b):
+    print('totlo')
