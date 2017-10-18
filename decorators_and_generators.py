@@ -28,3 +28,10 @@ def fib(n):
 @after5
 def test():
     print('Yo!')
+
+
+def fib_non_rec():
+    a, b = 1, 1
+    while True:
+        yield a
+        a, b = b, a + b
